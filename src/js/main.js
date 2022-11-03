@@ -2,7 +2,7 @@ const myUl = document.getElementById("myUl");
 
 class Confused {
   // klass som sätter egenskaper på våra objekt
-  constructor(student, helped) {
+  constructor(student) {
     this.student = student;
     this.helped = false;
   }
@@ -21,5 +21,28 @@ function createLi() {
 
   for (let i = 0; i < helpList.length; i++) {
     console.log(helpList[i]);
+
+    let needsHelp = document.createElement("li");
+    needsHelp.innerHTML = helpList[i].student;
+    needsHelp.classList.add("clickable"); // för styling att den är klickbar
+
+    if (helpList[i].helped) {
+      needsHelp.classList.add("beenHelped"); // styling när den har klickats
+    }
+
+    needsHelp.addEventListener("click", () => {
+      /*      handleClick(helpList[i]);*/
+      helpList[i].helped = true;
+      createLi();
+    });
+
+    myUl.appendChild(needsHelp);
   }
 }
+
+createLi();
+
+/*function handleClick(clickedName) {
+  clickedName.helped = true;
+  createLi();
+}*/
